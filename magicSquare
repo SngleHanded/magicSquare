@@ -21,7 +21,7 @@ class Main {
 		Scanner inputCube = new Scanner(new File("Lab8Data.txt"));
 		
 		
-		while(true) {
+		while(magicSquare) {
 			
 		//Creates the array.
 		for (d = 0; d < 4; d++) {
@@ -33,6 +33,9 @@ class Main {
 		// Displays the array.
 		for (d = 0; d <= 3; d++) {
 			for (c = 0; c <= 3; c++) {
+				// if (square[0][0] == -999) {
+				// 	break;
+				// }
 				System.out.print(square[d][c] + " ");
 			}
 			System.out.println();
@@ -100,13 +103,10 @@ class Main {
 		}
 
 
-			if (magicSquare) {		
-				System.out.println("IS a magic square");
-			}
-			else {
-				System.out.println("NOT a magic square");
-			}
+			if (magicSquare)
+				System.out.println("IS a magic square\n");
+			else
+				System.out.println("NOT a magic square\n");
 		}
-
 	}
 }
