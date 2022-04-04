@@ -13,15 +13,18 @@ class Main {
 
 	public static void main(String[] args) throws IOException {
 
-		int d, c;
-		int sumRow, sumColumn, sumDiag = 0, sum = 0;
-		final int end = -999;
-		boolean magicSquare = true;
-		int[][] square = new int[4][4];
 		Scanner inputCube = new Scanner(new File("Lab8Data.txt"));
 		
 		
-		while(magicSquare) {
+		while(true) {
+			int d, c;
+			int sumRow, sumColumn, sumDiag = 0, sum = 0;
+			boolean checkRow = true;
+			boolean checkColumn = true;
+			boolean checkDiag = true;
+			boolean checkDiag2 = true;
+			boolean magicSquare = true;
+			int[][] square = new int[4][4];
 			
 		//Creates the array.
 		for (d = 0; d < 4; d++) {
@@ -33,9 +36,9 @@ class Main {
 		// Displays the array.
 		for (d = 0; d <= 3; d++) {
 			for (c = 0; c <= 3; c++) {
-				// if (square[0][0] == -999) {
-				// 	break;
-				// }
+				if (square[0][0] == -999) {
+					break;
+				}
 				System.out.print(square[d][c] + " ");
 			}
 			System.out.println();
@@ -46,7 +49,7 @@ class Main {
 		for (c = 0; c < 4; c++) {
 			sum += square[0][c];
 		}
-		
+		System.out.println(sum);
 		//Now, math of row 2 and 3, to test against row 1. They must all equal the same.
 		for (d = 1; d < 4; d++) {
 			sumRow = 0;
@@ -54,9 +57,10 @@ class Main {
 				sumRow += square[d][c];
 			}
 			if (sumRow != sum) {
-				magicSquare = false;
+				checkRow = false;
 				break;
 			}
+			System.out.println(sumRow);
 		}
 
 		//Math for columns
@@ -67,9 +71,10 @@ class Main {
 					sumColumn += square[d][c];
 				}
 				if (sumColumn != sum) {
-					magicSquare = false;
+					checkColumn = false;
 					break;
 				}
+				System.out.println(sumColumn);
 			}
 		}
 
@@ -81,11 +86,11 @@ class Main {
 						sumDiag += square[d][c];
 					}
 					if (sumDiag != sum) {
-						magicSquare = false;
+						checkDiag = false;
 					}		
 				}
-			}	
-			System.out.print(sumDiag);
+			}
+			System.out.println(sumDiag);
 		}
 		
 		if (magicSquare) {
@@ -96,17 +101,23 @@ class Main {
 						sumDiag += square[d][c];
 					}
 					if (sumDiag != sum) {
-						magicSquare = false;
+						checkDiag2 = false;
 					}
 				}
 			}
+			System.out.println(sumDiag);
 		}
 
+		System.out.println(checkRow);
+        System.out.println(checkColumn);
+        System.out.println(checkDiag);
+		System.out.println(checkDiag2);
 
-			if (magicSquare)
-				System.out.println("IS a magic square\n");
-			else
-				System.out.println("NOT a magic square\n");
+			
+		if (checkRow && checkColumn && checkDiag)
+			System.out.println("IS a magic square\n");
+		else
+			System.out.println("NOT a magic square\n");
 		}
 	}
 }
