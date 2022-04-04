@@ -2,7 +2,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Scanner;
 
-public class Main {
+class Main {	
 
     public static void main(String[] args) throws IOException {
 
@@ -10,7 +10,7 @@ public class Main {
 
         while (true) {
             int d, c;
-            int sumRow, sumColumn, sumDiag = 0, sumDiag2 = 0, sum = 0;
+            int sumRow, sumColumn, sumDiag = 0, sumRevDiag = 0, sum = 0;
             boolean checkRow = true;
             boolean checkColumn = true;
             boolean checkDiag = true;
@@ -41,7 +41,7 @@ public class Main {
             for (c = 0; c < 4; c++) {
                 sum += square[0][c];
             }
-            System.out.println(sum);
+            // System.out.println(sum);
             //Now, math of row 2 and 3, to test against row 1. They must all equal the same.
             for (d = 1; d < 4; d++) {
                 sumRow = 0;
@@ -52,7 +52,7 @@ public class Main {
                     checkRow = false;
                     break;
                 }
-                System.out.println(sumRow);
+                // System.out.println(sumRow);
             }
 
             //Math for columns
@@ -66,50 +66,34 @@ public class Main {
                         checkColumn = false;
                         break;
                     }
-                    System.out.println(sumColumn);
+                    // System.out.println(sumColumn);
                 }
             }
 
             //Math for both diagonals, one at a time since they are opposite directions.
             for (d = 0; d < 4; d++) {
-                for (c = 0; c < 4; c++) {
-                    if (d == c) {
-                sumDiag += square[d][c];
-                    }
-                    if (sumDiag != sum) {
-                checkDiag = false;
-                    }
+                sumDiag += square[d][d];
                 }
-            }
-            System.out.println(sumDiag);
+                   if (sumDiag != sum) {
+                       checkDiag = false;
+                   }
+            // System.out.println(sumDiag);
 
-            if (magicSquare) {
-                for (d = 0; d < 4; d++) {
-                    for (c = 0; c < 4; c++) {
-                        if ((d + c) == 3) {
-                            sumDiag2 += square[d][c];
-                        }
-                        if (sumDiag2 != sum) {
-                            checkDiag2 = false;
-                        }
-                    }
+            for (d = 4; d < 4; d--) {
+                sumRevDiag += square[d][c];
                 }
-                System.out.println(sumDiag2);
-            }
+                   if (sumRevDiag != sum) {
+                       checkDiag2 = false;
+                   }
 
-//        for (c = 0; c < 4; c++) {
-//            if (d == c) {
-//                checkDiag = true;
-//            }
-//            if (sumDiag != sum) {
-//                checkDiag = false;
-//            }
-//        }
+            // System.out.println(sumRevDiag);
 
-            System.out.println(checkRow);
-            System.out.println(checkColumn);
-            System.out.println(checkDiag);
-            System.out.println(checkDiag2);
+            // System.out.println(checkRow);
+            // System.out.println(checkColumn);
+            // System.out.println(checkDiag);
+            // System.out.println(checkDiag2);
+
+			
 
 
             if (checkRow && checkColumn && checkDiag)
@@ -119,3 +103,94 @@ public class Main {
         }
     }
 }
+/*		
+		//This commented section was my lazy version, still worked, but did not do the math or evaluation. I hardwired the response.
+		
+	public static void main(String[] args) throws IOException {
+
+		int d, c;
+		int[][] square = new int[4][4];
+		Scanner inputCube = new Scanner(new File("Lab8Data.txt"));
+		
+		//Creates the first matrix.
+		for (d = 0; d < 4; d++) {
+			for (c = 0; c < 4; c++) {
+				square[d][c] = inputCube.nextInt();
+			}
+		}
+
+		// Displays the first matrix.
+		for (d = 0; d < 4; d++) {
+			for (c = 0; c < 4; c++) {
+				System.out.print(square[d][c] + " ");
+			}
+			System.out.println();
+		}
+		System.out.println("NOT a magic square\n");
+
+		//Creates the second matrix.
+		for (d = 0; d < 4; d++) {
+			for (c = 0; c < 4; c++) {
+				square[d][c] = inputCube.nextInt();
+			}
+		}
+
+		// Displays the second matrix.
+		for (d = 0; d < 4; d++) {
+			for (c = 0; c < 4; c++) {
+				System.out.print(square[d][c] + " ");
+			}
+			System.out.println();
+		}
+		System.out.println("IS a magic square\n");
+
+		//Creates the third matrix.
+		for (d = 0; d < 4; d++) {
+			for (c = 0; c < 4; c++) {
+				square[d][c] = inputCube.nextInt();
+			}
+		}
+
+		// Displays the third matrix.
+		for (d = 0; d < 4; d++) {
+			for (c = 0; c < 4; c++) {
+				System.out.print(square[d][c] + " ");
+			}
+			System.out.println();
+		}
+		System.out.println("IS a magic square\n");
+
+		//Creates the fourth matrix.
+		for (d = 0; d < 4; d++) {
+			for (c = 0; c < 4; c++) {
+				square[d][c] = inputCube.nextInt();
+			}
+		}
+
+		// Displays the fourth matrix.
+		for (d = 0; d < 4; d++) {
+			for (c = 0; c < 4; c++) {
+				System.out.print(square[d][c] + " ");
+			}
+			System.out.println();
+		}
+		System.out.println("IS a magic square\n");
+
+		//Creates the fifth matrix.
+		for (d = 0; d < 4; d++) {
+			for (c = 0; c < 4; c++) {
+				square[d][c] = inputCube.nextInt();
+			}
+		}
+
+		// Displays the fifth matrix.
+		for (d = 0; d < 4; d++) {
+			for (c = 0; c < 4; c++) {
+				System.out.print(square[d][c] + " ");
+			}
+			System.out.println();
+		}
+		System.out.println("NOT a magic square\n");
+	}
+}
+*/
